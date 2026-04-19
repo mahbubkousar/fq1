@@ -238,7 +238,6 @@
             margin-top: 1rem;
             border-radius: 12px;
             box-shadow: 0 5px 15px rgba(233, 30, 99, 0.1);
-            -webkit-overflow-scrolling: touch;
         }
 
         table {
@@ -246,7 +245,6 @@
             border-collapse: collapse;
             font-size: 0.95rem;
             background: white;
-            min-width: 500px;
         }
 
         th, td {
@@ -260,45 +258,70 @@
             color: var(--primary-color);
             font-weight: 600;
             font-family: 'Playfair Display', serif;
-            position: sticky;
-            top: 0;
-            z-index: 10;
         }
 
         tr:hover {
             background: rgba(255, 240, 245, 0.5);
         }
 
+        /* Mobile: Convert table to cards */
         @media (max-width: 768px) {
             .table-responsive {
+                overflow-x: visible;
+            }
+
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            thead {
+                display: none;
+            }
+
+            tr {
+                margin-bottom: 1.5rem;
                 border: 2px solid rgba(240, 147, 251, 0.3);
                 border-radius: 12px;
+                background: white;
+                box-shadow: 0 4px 10px rgba(233, 30, 99, 0.1);
+                overflow: hidden;
+            }
+
+            td {
+                border: none;
+                border-bottom: 1px solid rgba(233, 30, 99, 0.1);
                 position: relative;
-            }
-
-            .table-responsive::after {
-                content: "← Swipe to see more →";
+                padding: 12px 12px 12px 35%;
+                text-align: left;
+                min-height: 45px;
                 display: block;
-                text-align: center;
-                font-size: 0.75rem;
-                color: #f5576c;
-                padding: 0.5rem;
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+
+            td:last-child {
+                border-bottom: none;
+            }
+
+            td::before {
+                content: attr(data-label) ":";
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 32%;
+                padding: 12px 8px;
+                font-weight: 600;
+                color: var(--primary-color);
                 background: linear-gradient(135deg, #ffeef8 0%, #ffd6e8 100%);
-                border-radius: 0 0 10px 10px;
-                font-style: italic;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                font-size: 0.8rem;
+                border-right: 2px solid rgba(240, 147, 251, 0.3);
             }
 
-            table {
-                font-size: 0.85rem;
-            }
-
-            th, td {
-                padding: 8px 10px;
-                white-space: nowrap;
-            }
-
-            th {
-                font-size: 0.85rem;
+            td strong {
+                font-weight: 600;
             }
         }
 
@@ -969,24 +992,24 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><strong>Pathology</strong></td>
-                                    <td>Ischemia (inadequate blood flow) due to narrowing.</td>
-                                    <td>Necrosis (tissue death) due to complete blockage.</td>
+                                    <td data-label="Feature"><strong>Pathology</strong></td>
+                                    <td data-label="IHD">Ischemia (inadequate blood flow) due to narrowing.</td>
+                                    <td data-label="MI">Necrosis (tissue death) due to complete blockage.</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Damage</strong></td>
-                                    <td>Temporary & <span class="keyword">Reversible</span>.</td>
-                                    <td>Permanent & <span class="keyword">Irreversible</span>.</td>
+                                    <td data-label="Feature"><strong>Damage</strong></td>
+                                    <td data-label="IHD">Temporary & <span class="keyword">Reversible</span>.</td>
+                                    <td data-label="MI">Permanent & <span class="keyword">Irreversible</span>.</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Pain Relief</strong></td>
-                                    <td>Relieved by rest or Sublingual Nitroglycerin.</td>
-                                    <td>Not relieved by rest; requires IV opioids (Morphine).</td>
+                                    <td data-label="Feature"><strong>Pain Relief</strong></td>
+                                    <td data-label="IHD">Relieved by rest or Sublingual Nitroglycerin.</td>
+                                    <td data-label="MI">Not relieved by rest; requires IV opioids (Morphine).</td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Cardiac Markers</strong></td>
-                                    <td>Normal.</td>
-                                    <td><span class="keyword">Elevated</span> (Troponin, CK-MB).</td>
+                                    <td data-label="Feature"><strong>Cardiac Markers</strong></td>
+                                    <td data-label="IHD">Normal.</td>
+                                    <td data-label="MI"><span class="keyword">Elevated</span> (Troponin, CK-MB).</td>
                                 </tr>
                             </tbody>
                         </table>
