@@ -238,6 +238,7 @@
             margin-top: 1rem;
             border-radius: 12px;
             box-shadow: 0 5px 15px rgba(233, 30, 99, 0.1);
+            -webkit-overflow-scrolling: touch;
         }
 
         table {
@@ -245,6 +246,7 @@
             border-collapse: collapse;
             font-size: 0.95rem;
             background: white;
+            min-width: 500px;
         }
 
         th, td {
@@ -258,10 +260,46 @@
             color: var(--primary-color);
             font-weight: 600;
             font-family: 'Playfair Display', serif;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
 
         tr:hover {
             background: rgba(255, 240, 245, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .table-responsive {
+                border: 2px solid rgba(240, 147, 251, 0.3);
+                border-radius: 12px;
+                position: relative;
+            }
+
+            .table-responsive::after {
+                content: "← Swipe to see more →";
+                display: block;
+                text-align: center;
+                font-size: 0.75rem;
+                color: #f5576c;
+                padding: 0.5rem;
+                background: linear-gradient(135deg, #ffeef8 0%, #ffd6e8 100%);
+                border-radius: 0 0 10px 10px;
+                font-style: italic;
+            }
+
+            table {
+                font-size: 0.85rem;
+            }
+
+            th, td {
+                padding: 8px 10px;
+                white-space: nowrap;
+            }
+
+            th {
+                font-size: 0.85rem;
+            }
         }
 
         .time-widget {
